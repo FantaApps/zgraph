@@ -1,0 +1,47 @@
+# Set our required libraries
+libraries       = ['']
+library_paths   = 'src/lib'
+cppDefines      = {}
+cppFlags        = ['-Wall', '-Wdeprecated-declarations']#, '-Werror']
+cxxFlags        = ['-I/Users/stplaydog/gitlocal/bfs_query/src/third_party/', '-std=c++11', '-static', '-static-libstdc++', '-L.', '-fopenmp', '-g2', '-O2', '-lz', '-lzstd']
+#cxxFlags        = ['-I./src/third_party', '-std=c++11', '-static', '-static-libstdc++', '-L.', '-fopenmp', '-O3', '-ftree-vectorize', '-msse2', '-ftree-vectorizer-verbose=5']
+
+# define the attributes of the build environment shared between
+# both the debug and release builds
+common_env = Environment()
+common_env.Append(LIBS          = libraries)
+common_env.Append(LIBPATH       = library_paths)
+common_env.Append(CPPDEFINES    = cppDefines)
+common_env.Append(CPPFLAGS      = cppFlags)
+common_env.Append(CXXFLAGS      = cxxFlags)
+common_env.Append(LINKFLAGS     =['-std=c++11', '-static-libstdc++', '-fopenmp', '-O3', '-lzstd'])
+
+# uncomment to force g++ for c code also--creates warnings but
+# avoids need for extern "C"
+
+# Our release build is derived from the common build environment...
+release_env = common_env.Clone()
+release_env.Append(CPPDEFINES=['RELEASE'])
+release_env.VariantDir('build/release/src/lib', 'src/lib')
+release_env.VariantDir('build/release/src/tools', 'src/tools')
+release_env.VariantDir('build/release/src/server', 'src/server', duplicate=0)
+
+# We define our debug build environment in a similar fashion...
+debug_env = common_env.Clone()
+debug_env.Append(CPPDEFINES=['DEBUG'])
+debug_env.VariantDir('build/debug/src/lib', 'src/lib', duplicate=0)
+debug_env.VariantDir('build/debug/src/tools', 'src/tools', duplicate=0)
+#debug_env.VariantDir('build/debug/src/server', 'src/server', duplicate=0)
+
+
+env = release_env
+Export('env')
+env.SConscript('build/release/src/lib/sconscript')
+env.SConscript('build/release/src/tools/sconscript')
+#env.SConscript('build/release/src/server/sconscript')
+
+env = debug_env
+Export('env')
+env.SConscript('build/debug/src/lib/sconscript')
+env.SConscript('build/debug/src/tools/sconscript')
+#env.SConscript('build/debug/src/server/sconscript')

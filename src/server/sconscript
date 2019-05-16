@@ -1,0 +1,14 @@
+import os
+
+Import('env')
+
+env = env.Clone()
+
+env.Replace(CC = "/usr/local/gcc-4.9.2/bin/g++")
+env.Replace(CXX = "/usr/local/gcc-4.9.2/bin/g++")
+
+env.Program(target = 'queryServer',
+            source = ['query_server.cpp'],
+            LIBS = ['graphLib'],
+            LIBPATH = '../lib/')
+
