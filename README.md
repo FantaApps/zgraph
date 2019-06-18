@@ -1,5 +1,5 @@
 # Graph Query Toolkit  
-Author: Zhaoming Yin  
+Author: [Zhaoming Yin](https://stplaydog.github.io/)  
   
 ## Brief  
 This toolkit is used for querying the number of vertices that a input query vertex can reach. The underlying algorthm utilizes the Beamer BFS algorithm [1]. The major consideration for the design and implementation of this toolkit involves three bullet points:  
