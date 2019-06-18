@@ -55,9 +55,12 @@ graphQuery <query_file> <graph_folder> <CSR|Adj> <uint32|uint64> [num_threads]
 
   
 ## Reference 
+
+```
 [1] S. Beamer et. al Direction-Optimizing Breadth-First Search  
 [2] shared_ptr performnce: https://stackoverflow.com/questions/22295665/how-much-is-the-overhead-of-smart-pointers-compared-to-normal-pointers-in-c
 [3] Y. Zhang et. al Consensus algorithms for the generation of all maximal bicliques
 [4] Y. Zhang et. al On Finding Bicliques in Bipartite Graphs: a Novel Algorithm with Application to the Integration of Diverse Biological Data Types
 [5] V. Batagelj et. al An O(m) Algorithm for Cores Decomposition of Networks
 [6] Tarjan Depth-first search and linear graph algorithms
+```
