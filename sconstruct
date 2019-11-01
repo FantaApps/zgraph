@@ -3,7 +3,7 @@ libraries       = ['']
 library_paths   = 'src/lib'
 cppDefines      = {}
 cppFlags        = ['-Wall', '-Wdeprecated-declarations']#, '-Werror']
-cxxFlags        = ['-I/Users/stplaydog/gitlocal/bfs_query/src/third_party/', '-std=c++11', '-static', '-static-libstdc++', '-L.', '-fopenmp', '-g2', '-O2', '-lz', '-lzstd']
+cxxFlags        = ['-I/usr/local/google/home/zhaomingyin/gitlocal/zgraph/src/third_party/', '-std=c++11', '-static', '-static-libstdc++', '-L.', '-fopenmp', '-g2', '-O2', '-lz', '-lzstd']
 #cxxFlags        = ['-I./src/third_party', '-std=c++11', '-static', '-static-libstdc++', '-L.', '-fopenmp', '-O3', '-ftree-vectorize', '-msse2', '-ftree-vectorizer-verbose=5']
 
 # define the attributes of the build environment shared between

@@ -321,17 +321,17 @@ void GraphBnB<VType>::GetNeighbour(std::vector<VType> &L,
                 return;
         }
     }
-    else if(range*fls(lsize) > lsize*fls(range))
-    {
-        for(size_t i=0; i<L.size(); i++)
-        {
-            mCountLCheck++;
-            if(BinarySearch(edges, L[i], (int)from, (int)to) != -1)
-            {
-                st.insert(L[i]);
-            }
-        }
-    }
+    //else if(range*fls(lsize) > lsize*fls(range))
+    //{
+    //    for(size_t i=0; i<L.size(); i++)
+    //    {
+    //        mCountLCheck++;
+    //        if(BinarySearch(edges, L[i], (int)from, (int)to) != -1)
+    //        {
+    //            st.insert(L[i]);
+    //        }
+    //    }
+    //}
     else
     {
         for(size_t i=from; i<to; ++i)
