@@ -2,51 +2,66 @@
 Author: [Zhaoming Yin](https://stplaydog.github.io/)  
   
 ## Brief  
-This toolkit is used for querying the number of vertices that a input query vertex can reach. The underlying algorthm utilizes the Beamer BFS algorithm [1]. The major consideration for the design and implementation of this toolkit involves three bullet points:  
-* Correctness:  
-    - Check sum to ensure the graph is correct;  
-    - Small unit test to ensure the BFS algorithm is correct.   
-* Performance:  
-    - Loading graph (parallel + binary storage);  
-    - Using (Compressed sparse row) CSR;  
-    - Edge list is sorted;  
-    - Using beamer algorithm (top-down + bottom-up step).  
-    - shared_ptr has big overhead for ctor/dtor [2], remember to reference it.
-* Product:   
-    - Support both CSR/Adjacency list, such that we can trade off between performance and graph update;   
-    - Support both uint32 bit and uint64 bit of vertex/edge encoding;  
+This package can do following things:
+
+1) BFS (beamer's algorithm);
+2) graph query the number of vertices that a input query vertex can reach;
+3) Biclique computation.
   
 ## How to build  
+### Linux
 You need to install:  
-* python2.7+  
-* Scons  
-* C++11 support  
+* python2.7+
+* Scons
+* C++11 support
+* install zstd
+
+### MAC
+* install homebrew
+* install scons
+* install zstd
   
 In the local folder, please run:
 ```
-/usr/local/bin/python2.7 /usr/local/bin/scons
+scons
 ```
+
+## Graph format
+Our graph format is compatible with Prof. Jure Leskovec's graph collection format.
+In which we call it as .gr file.
   
 ## How to run
-* You need to configure the environment variables first
+### You need to configure the environment variables first
 ```
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/:/usr/local/gcc-4.9.2/lib64/:/apsarapangu/disk8/twitter-2010/bfs_query/build/release/src/lib/
-```  
+```
 
-* Build the graph in CSR or Adjacency list format  
+### Build the graph in CSR or Adjacency list format  
   
-1) Graph Prepareation  
+1) Graph Prepareation
   
 ```
-graphPrepare <file_list> <tgtFolder> <CSR|Adj> <uint32|uint64>  
+graphPrepare <file_list> <tgtFolder> <CSR|Adj> <uint32|uint64>
 ```
   
 2) Graph Checksum
 ```
-graphCheckSum <CSR|Adj|Orig> <folder> <uint32|uint64>  
+graphCheckSum <CSR|Adj|Orig> <folder> <uint32|uint64>
+```
+
+3) If you want to run biclique program, you might need to convert the graph format in [8] to .gr file 
+
+```
+python biclique_convert.py <from_file> <.gr file>
+```
+
+Or, you might need to convert the graph format in [4] to the .gr file.
+
+```
+python el2gr.py <from_file> <.gr file>
 ```
    
-* Run the graph query program  
+### Run the graph query program  
 
 1) Graph Query 
 ```
@@ -63,4 +78,6 @@ graphQuery <query_file> <graph_folder> <CSR|Adj> <uint32|uint64> [num_threads]
 [4] Y. Zhang et. al On Finding Bicliques in Bipartite Graphs: a Novel Algorithm with Application to the Integration of Diverse Biological Data Types
 [5] V. Batagelj et. al An O(m) Algorithm for Cores Decomposition of Networks
 [6] Tarjan Depth-first search and linear graph algorithms
+[7] https://snap.stanford.edu/data/index.html
+[8] http://konect.uni-koblenz.de/networks/amazon-ratings
 ```
