@@ -1,1 +1,0 @@
-/Users/zhaomingyin/gitlocal/zgraph/test/data/actor_movie.gr

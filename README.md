@@ -43,6 +43,17 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/:/usr/local/gcc-4.9.2/lib
 ```
 graphPrepare <file_list> <tgtFolder> <CSR|Adj> <uint32|uint64>
 ```
+
+Or you can quickly run:
+```
+./test/graph_prepare_scripts/prepare_bin_graph.sh <FILE_PREFIX>
+```
+
+For instance:
+
+```
+./test/graph_prepare_scripts/prepare_bin_graph.sh actor_movie
+```
   
 2) Graph Checksum
 ```
@@ -52,7 +63,7 @@ graphCheckSum <CSR|Adj|Orig> <folder> <uint32|uint64>
 3) If you want to run biclique program, you might need to convert the graph format in [8] to .gr file 
 
 ```
-python biclique_convert.py <from_file> <.gr file>
+python biclique_convert.py <from_file> <.gr file> <TAB|WHITE_SPACE>
 ```
 
 Or, you might need to convert the graph format in [4] to the .gr file.

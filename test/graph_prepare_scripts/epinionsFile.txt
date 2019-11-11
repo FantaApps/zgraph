@@ -1,1 +1,0 @@
-/Users/stplaydog/gitlocal/bfs_query/test/data/epinions_graph.txt
