@@ -70,6 +70,7 @@ public:
         mEnd(0),
         mTot(0),
         mCountLCheck(0),
+        mLastRes(false),
         mCountRevLCheck(0),
         mReportInterval(100000),
         mCheckPtInterval(100000)
@@ -178,8 +179,16 @@ private:
         return lhs.second > rhs.second;
     }
 
-    void Print(std::vector<VType> &v)
+    void Print(std::vector<VType> &v, std::string name)
     {
+        std::cout<<name<<" ";
+        for(auto i: v)
+            std::cout<<i<<" ";
+        std::cout<<std::endl;
+    }
+    void Print(std::set<VType> &v, std::string name)
+    {
+        std::cout<<name<<" ";
         for(auto i: v)
             std::cout<<i<<" ";
         std::cout<<std::endl;
@@ -296,7 +305,7 @@ void GraphBnB<VType>::GetNeighbour(std::vector<VType> &L,
     std::shared_ptr<VType> &edges = mG->GetRevEdges(x, from, to); 
     size_t range = (to-from); 
     size_t lsize = L.size(); 
-    if(range> 10000 || (range>50 && L.size()<15)) // TODO both are sorted, optimize this
+    /*if(range> 10000 || (range>50 && L.size()<15)) // TODO both are sorted, optimize this
     {
         for(size_t i=0; i<L.size(); i++)
         {
@@ -332,7 +341,7 @@ void GraphBnB<VType>::GetNeighbour(std::vector<VType> &L,
     //        }
     //    }
     //}
-    else
+    else*/ //TODO reduce all these complexity to get correctness for nowß
     {
         for(size_t i=from; i<to; ++i)
         {
@@ -343,7 +352,7 @@ void GraphBnB<VType>::GetNeighbour(std::vector<VType> &L,
                 st.insert(key);
             }
             if(neigh.size() == L.size())
-                return;
+                return; // TODO understand this 
         }
     }
     neigh.assign(st.begin(), st.end());
@@ -484,7 +493,9 @@ bool GraphBnB<VType>::CheckMaximalNew(std::set<VType> &Q,
             if(Q.size()> 1 && (key < *Q.begin() || key > *Q.rbegin())) continue;
 
             if(mCntTime[key] == mTime)
+            {
                 continue;
+            }
             else
             {
                 mCntTime[key] = mTime;
