@@ -11,6 +11,8 @@ class BiCliqueConvert(object):
         self.revGraphMap = {}
         self.gf = open(graphFile)
         self.of = open(outFile, 'w')
+        self.numFrom = 0
+        self.numTo = 0
         if delimiter == "WHITE_SPACE":
             self.readGraph(" ")
         elif delimiter == "TAB":
@@ -43,16 +45,22 @@ class BiCliqueConvert(object):
         for key in self.graph:
             self.graphMap[key] = cnt
             cnt += 1
+        self.numFrom = len(self.graphMap)
         for key in self.revGraph:
             self.revGraphMap[key] = cnt
             cnt += 1
+        self.numTo = len(self.revGraphMap)
 
     def writeToFile(self):
+        print self.numFrom, self.numTo
         for key in self.graph:
             vFrom = str(self.graphMap[key])
             for val in self.graph[key]:
                 vTo = str(self.revGraphMap[val])
-                self.of.write(vFrom + ' ' + vTo + '\n')
+                if(self.numFrom < self.numTo):
+                    self.of.write(vFrom + ' ' + vTo + '\n')
+                else:
+                    self.of.write(vTo + ' ' + vFrom + '\n')
         self.gf.close()
         self.of.close()
 
