@@ -37,6 +37,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/:/usr/local/gcc-4.9.2/lib
 ```
 
 ### Build the graph in CSR or Adjacency list format  
+
+0) Remove redundant edges
+
+```
+cd python
+python remove_redundant_edges.py <src_graph> <tgt_graph>
+```
   
 1) Graph Prepareation
   
