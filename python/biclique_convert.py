@@ -2,7 +2,8 @@
 
 import sys
 
-# conver graph format to biclique format now
+# Example
+# python biclique_convert.py graph.file outgraph.file <WHITE_SPACE | TAB>
 class BiCliqueConvert(object):
     def __init__(self, graphFile, outFile, delimiter):
         self.graph = {}
